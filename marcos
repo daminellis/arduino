@@ -1,0 +1,401 @@
+Led em serie
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(13, 1);  // turn the LED on (HIGH is the voltage level)                     // wait for a second
+  digitalWrite(12, 1);
+  digitalWrite(11, 1);
+  delay(1000);
+  digitalWrite(13, 0);   // turn the LED off by making the voltage LOW                    // wait for a second
+  digitalWrite(12, 0);
+  digitalWrite(11, 0);
+  delay(100);
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const int led_vermelho = 13;			//
+const int led_branco = 12;			//
+const int led_amarelo = 11;			//
+char led;					//
+
+void setup() {
+  pinMode(led_vermelho, OUTPUT);		//
+  pinMode(led_branco, OUTPUT);			//
+  pinMode(led_amarelo, OUTPUT);			//
+  Serial.begin(115200); 			// Definição da velocide de transmissão em 115200 bps
+}
+
+void loop() {
+  if (Serial.available()) {			//
+    led = Serial.read();			//
+    if(led == 'R') { 				// Led vermelho - red
+      digitalWrite(led_vermelho, HIGH); 	// Acende led
+    }
+    if (led == 'B') { 				// Led verde - green
+      digitalWrite(led_branco, HIGH); 		// Acende led
+    }
+    if (led == 'Y') { 				// Led amarelo - yellow
+      digitalWrite(led_amarelo, HIGH); 		// Acende led
+    }
+    if(led == 'r') { 				// Led vermelho - red
+      digitalWrite(led_vermelho, LOW); 	// Acende led
+    }
+    if (led == 'b') { 				// Led verde - green
+      digitalWrite(led_branco, LOW); 		// Acende led
+    }
+    if (led == 'y') { 				// Led amarelo - yellow
+      digitalWrite(led_amarelo, LOW); 		// Acende led
+    }
+  }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ENGENHARIA PARA BEBES
+
+const int pin_ledA = 13;
+const int pin_ledB = 12;
+const int pin_ledC = 11;
+const int pin_botao1 = 3;							
+const int pin_botao2 = 2;
+
+void setup() {
+  pinMode(pin_ledA, OUTPUT);
+  pinMode(pin_ledB, OUTPUT);
+  pinMode(pin_ledC, OUTPUT);
+  pinMode(pin_botao1, INPUT);			//
+  pinMode(pin_botao2, INPUT);
+  Serial.begin(115200); 			// Definição da velocide de transmissão em 115200 bps
+}
+
+void loop() {
+  bool a = digitalRead(pin_botao1);
+  bool b = digitalRead(pin_botao2);
+
+  if ((a == 1) && (b == 1)) {
+    digitalWrite(pin_ledA, 1);
+    digitalWrite(pin_ledB, 1);
+    digitalWrite(pin_ledC, 1);
+  }
+  else {
+    digitalWrite(pin_ledA, 0);
+  }
+
+  if ((a == 1) && (b == 0)) {
+    digitalWrite(pin_ledB, 1);
+  }
+  else {
+    digitalWrite(pin_ledB, 0);
+  }
+
+  if ((a == 0) && (b == 1)) {
+    digitalWrite(pin_ledC, 1);
+  }
+  else {
+    digitalWrite(pin_ledC, 0);
+  }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const int pin_ledA = 13;
+const int pin_ledB = 12;
+const int pin_botao1 = 3;							
+const int pin_botao2 = 2;
+
+void setup() {
+  pinMode(pin_ledA, OUTPUT);
+  pinMode(pin_ledB, OUTPUT);
+  pinMode(pin_botao1, INPUT);			//
+  pinMode(pin_botao2, INPUT);
+  Serial.begin(115200); 			// Definição da velocide de transmissão em 115200 bps
+}
+
+void loop() {
+  bool a = digitalRead(pin_botao1);
+  bool b = digitalRead(pin_botao2);
+
+
+
+  if ((a == 1) && (b == 0)) {
+    digitalWrite(pin_ledB, 1);
+  }
+  else {
+    digitalWrite(pin_ledB, 0);
+  }
+
+  if ((a == 0) && (b == 1)) {
+    digitalWrite(pin_ledA, 1);
+  }
+  else {
+    digitalWrite(pin_ledA, 0);
+  }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+resposta botao contador
+
+
+int botao = 10;        // Pino digital do botão
+int led1 = 9;          // Pino digital do LED 1
+int led2 = 2;          // Pino digital do LED 2
+int estadobut = 0;      // Variável para armazenar o valor atual do botão
+int ultimoestado = 0;  // Variável para armazenar o valor anterior do botão
+int contador = 0;       // Contador de pressões do botão
+
+void setup() {
+  pinMode(botao, INPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  estadobut = digitalRead(botao);
+
+  if (estadobut != ultimoestado) {
+    if (estadobut == HIGH) {   // Botão pressionado
+      // Ação quando o botão é pressionado (opcional)
+    } else {                     // Botão solto
+      contador++;              // Incrementa o contador
+
+      // Faça algo com o valor, por exemplo, exiba-o no monitor serial
+      Serial.print("Contagem: ");
+      Serial.println(contador);
+
+      // Verifica se o contador é múltiplo de 5
+      if (contador % 5 == 0) {
+        digitalWrite(led1, HIGH);  // Acende o LED 1
+        digitalWrite(led2, HIGH);  // Acende o LED 2
+      } else {
+        digitalWrite(led1, LOW);   // Desliga o LED 1
+        digitalWrite(led2, LOW);   // Desliga o LED 2
+      }
+    }
+
+    // Atualiza o estado anterior do botão
+    ultimoestado = estadobut;
+  }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+const int led1 = 6;
+const int led2 = 7;
+const int pin_botao = 2;
+int contador = 0;
+int aux = 0;
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(pin_botao, INPUT);
+  Serial.begin(115200);
+}
+
+void loop() { 
+  bool A = digitalRead(pin_botao);
+
+    if(A == 1){
+      if(aux == 0){
+        contador++;
+        aux = 1;
+      }
+    } 
+    else{
+      aux = 0;
+    }
+
+  if(contador >= 10){
+    digitalWrite(led2, 1);
+  }
+  else{
+    digitalWrite(led2, 0);
+  }
+
+  if ((contador % 5) == 0){
+    digitalWrite(led1, 1);
+  }
+  else {
+    digitalWrite(led1, 0);
+  }
+  Serial.println(contador);
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+const int buttonPin = 11;
+const int ledPins[] = {2, 3, 4, 5};
+int currentSequence = 0;
+
+void setup() {
+  pinMode(buttonPin, INPUT_PULLUP);
+  for (int i = 0; i < 4; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  if (digitalRead(buttonPin) == 1) { // Verifica se o botão foi pressionado
+    currentSequence++; // Incrementa a sequência atual
+    if (currentSequence > 16) {
+      currentSequence = 0; // Reinicia a sequência se for maior que 3
+    }
+    delay(200); // Pequeno atraso para evitar pressionamentos múltiplos
+  }
+  
+  // Executa a sequência atual
+  switch (currentSequence) {
+    case 0:
+      ledSequence1();
+      break;
+    case 1:
+      ledSequence2();
+      break;
+    case 2:
+      ledSequence3();
+      break;
+    case 3:
+      ledSequence4();
+      break;
+    case 4:
+      ledSequence5();
+      break;
+    case 5:
+      ledSequence6();
+      break;
+    case 6:
+      ledSequence7();
+      break;
+    case 7:
+      ledSequence8();
+      break;
+    case 8:
+      ledSequence9();
+      break;
+    case 9:
+      ledSequence10();
+      break;
+    case 10:
+      ledSequence11();
+      break;
+    case 11:
+      ledSequence12();
+      break;
+    case 12:
+      ledSequence13();
+      break;
+    case 13:
+      ledSequence14();
+      break;
+    case 14:
+      ledSequence15();
+      break;
+    case 15:    
+      ledSequence16();
+      break;
+    default:
+      break;
+  }
+}
+
+// Defina aqui as sequências de acendimento dos LEDs
+void ledSequence1() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], LOW);
+}
+
+void ledSequence2() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], LOW);
+}
+
+void ledSequence3() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], LOW);
+}
+
+void ledSequence4() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], LOW);
+}
+void ledSequence5() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], LOW);
+}
+void ledSequence6() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], LOW);
+}
+void ledSequence7() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], LOW);
+}void ledSequence8() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], LOW);
+}void ledSequence9() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence10() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence11() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence12() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], LOW);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence13() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence14() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], LOW);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence15() {
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], HIGH);
+}void ledSequence16() {
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], HIGH);
+  digitalWrite(ledPins[2], HIGH);
+  digitalWrite(ledPins[3], HIGH);
+}
