@@ -1,4 +1,4 @@
-Led em serie
+7Led em serie
 void setup() {
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(13, OUTPUT);
@@ -473,3 +473,74 @@ void loop() {
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 prova ex2
+// Define as constantes para os pinos dos botões
+const int buttonPin1 = 2;
+const int buttonPin2 = 3;
+const int buttonPin3 = 4;
+
+// Define as constantes para os pinos dos LEDs
+const int ledPin1 = 5;
+const int ledPin2 = 6;
+const int ledPin3 = 7;
+
+// Variáveis de estado dos botões
+int buttonState1 = 0;
+int buttonState2 = 0;
+int buttonState3 = 0;
+
+// Variáveis de estado dos LEDs
+int ledState1 = LOW;
+int ledState2 = LOW;
+int ledState3 = LOW;
+
+void setup() {
+  // Configura os pinos dos botões como entrada
+  pinMode(buttonPin1, INPUT);
+  pinMode(buttonPin2, INPUT);
+  pinMode(buttonPin3, INPUT);
+
+  // Configura os pinos dos LEDs como saída
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+}
+
+void loop() {
+  // Lê o estado dos botões
+  buttonState1 = digitalRead(buttonPin1);
+  buttonState2 = digitalRead(buttonPin2);
+  buttonState3 = digitalRead(buttonPin3);
+
+  // Botão 1
+  if (buttonState1 == HIGH) {
+    // Liga o LED 1 se o botão for pressionado
+    ledState1 = HIGH;
+  } else {
+    // Apaga o LED 1 se o botão for solto
+    ledState1 = LOW;
+  }
+
+  // Botão 2
+  if (buttonState2 == HIGH) {
+    // Liga o LED 2 se o botão for pressionado
+    ledState2 = HIGH;
+  } else {
+    // Apaga o LED 2 se o botão for solto
+    ledState2 = LOW;
+  }
+
+  // Botão 3
+  if (buttonState3 == HIGH) {
+    // Liga o LED 3 se o botão for pressionado
+    ledState3 = HIGH;
+  } else {
+    // Apaga o LED 3 se o botão for solto
+    ledState3 = LOW;
+  }
+
+  // Atualiza o estado dos LEDs
+  digitalWrite(ledPin1, ledState1);
+  digitalWrite(ledPin2, ledState2);
+  digitalWrite(ledPin3, ledState3);
+}
+
