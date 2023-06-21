@@ -399,3 +399,77 @@ void ledSequence7() {
   digitalWrite(ledPins[2], HIGH);
   digitalWrite(ledPins[3], HIGH);
 }
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+prova exer 1
+
+//configurando as portas de saida e entrada
+const int led1 = 2;
+const int led2 = 3;
+const int led3 = 4;
+const int start = 13;
+const int stop = 12;
+const int s1 = 11;
+const int s2 = 10;
+const int s3 = 9;
+// Variáveis de controle
+bool cicloAtivo = false;
+bool limiteAlcancado = false;
+int numCiclos = 0;
+void setup() {
+//configurando por onde sai e por onde entra
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(start, INPUT);
+  pinMode(stop, INPUT);
+  pinMode(s1, INPUT);
+  pinMode(s2, INPUT);
+  pinMode(s3, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Verificar se o botão de START foi pressionado
+  if (digitalRead(start) == HIGH && !cicloAtivo) {
+    // Esperar existir uma peça no sensor S1
+    while (digitalRead(s1) == LOW) {
+      // Aguardar
+    }
+    // Iniciar o ciclo
+    cicloAtivo = true;
+    digitalWrite(led1, HIGH); // Acender a lâmpada "Ligada"
+  }
+
+  // Verificar se a peça chegou ao sensor S2
+  if (digitalRead(s2) == HIGH && cicloAtivo) {
+    digitalWrite(led1, LOW); // Desligar a esteira M1
+    digitalWrite(led2, HIGH); // Ligar a esteira M2
+  }
+
+  // Verificar se a peça chegou ao sensor S3
+  if (digitalRead(s3) == HIGH && cicloAtivo) {
+    digitalWrite(led2, LOW); // Desligar a esteira M2
+    numCiclos++; // Incrementar o contador de ciclos
+
+    // Verificar se o limite de 5 ciclos foi alcançado
+    if (numCiclos == 5) {
+      digitalWrite(led3, HIGH); // Acender a lâmpada "Limite 5 peças"
+      limiteAlcancado = true;
+    }
+
+    // Verificar se o botão de STOP foi pressionado
+    if (digitalRead(stop) == HIGH || limiteAlcancado) {
+      // Finalizar o ciclo
+      cicloAtivo = false;
+      digitalWrite(led3, LOW); // Apagar a lâmpada "Ligada"
+      numCiclos = 0; // Reiniciar o contador de ciclos
+      limiteAlcancado = false;
+    }
+  }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+prova ex2
